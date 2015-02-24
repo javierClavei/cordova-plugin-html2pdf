@@ -455,7 +455,7 @@ public class Html2pdf extends CordovaPlugin
             for( int i=1; i<=currPageCount; ++i )
             {
             	file = new File(dir, "pdf-page-"+i+".png");
-            	com.lowagie.text.Image image = com.lowagie.text.Image.getInstance (file.getAbsolutePath());
+            	Image image = Image.getInstance (file.getAbsolutePath());
                 image.scaleToFit( (float)pageWidth, 9999);
             	image.setAlignment(Element.ALIGN_CENTER);
             	document.add(image);
