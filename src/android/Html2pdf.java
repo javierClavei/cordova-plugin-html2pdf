@@ -350,7 +350,7 @@ public class Html2pdf extends CordovaPlugin
      * @param WebView
      * @return Bitmap
      */
-    Bitmap getWebViewAsBitmap(WebView view)
+    public Bitmap getWebViewAsBitmap(WebView view)
     {
     	Bitmap b; 
     	
