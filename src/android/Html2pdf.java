@@ -344,7 +344,7 @@ public class Html2pdf extends CordovaPlugin
 	    PackageManager packageManager = context.getPackageManager();
 	    return (packageManager.queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY).size() > 0);
 	}
-    
+    I
     /**
      * Takes a WebView and returns a Bitmap representation of it (takes a "screenshot").
      * @param WebView
@@ -455,7 +455,7 @@ public class Html2pdf extends CordovaPlugin
             for( int i=1; i<=currPageCount; ++i )
             {
             	file = new File(dir, "pdf-page-"+i+".png");
-            	Image image = Image.getInstance (file.getAbsolutePath());
+            	com.lowagie.text.Image image = com.lowagie.text.Image.getInstance (file.getAbsolutePath());
                 image.scaleToFit( (float)pageWidth, 9999);
             	image.setAlignment(Element.ALIGN_CENTER);
             	document.add(image);
