@@ -3,6 +3,7 @@ package at.modalog.cordova.plugin.html2pdf;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.awt.*;
 
 import org.apache.cordova.CallbackContext;
 import org.apache.cordova.CordovaPlugin;
