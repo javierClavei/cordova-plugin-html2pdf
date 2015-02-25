@@ -91,7 +91,7 @@ public class Html2pdf extends CordovaPlugin
 		        cordova.getActivity().runOnUiThread( new Runnable() {
 		            public void run()
 					{
-		            	if( Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT ) // Android 4.4
+		            	if( /*Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT*/1==1 ) // Android 4.4
 		            	{
 		            		/*
 			            	 * None-Kitkat pdf creation (Android < 4.4)
@@ -105,61 +105,61 @@ public class Html2pdf extends CordovaPlugin
 			            	 * Kitkat pdf creation by using the android print framework (Android >= 4.4)
 			            	 */
 		            		
-							// Create a WebView object specifically for printing
-							WebView page = new WebView(cordova.getActivity());
-							page.getSettings().setJavaScriptEnabled(false);
-							page.setDrawingCacheEnabled(true);
-					        // Auto-scale the content to the webview's width.
-							page.getSettings().setLoadWithOverviewMode(true);
-							page.getSettings().setUseWideViewPort(true);
-							page.setInitialScale(0);
-					        // Disable android text auto fit behaviour
-							page.getSettings().setLayoutAlgorithm(WebSettings.LayoutAlgorithm.NORMAL);
+					// Create a WebView object specifically for printing
+					WebView page = new WebView(cordova.getActivity());
+					page.getSettings().setJavaScriptEnabled(false);
+					page.setDrawingCacheEnabled(true);
+				        // Auto-scale the content to the webview's width.
+					page.getSettings().setLoadWithOverviewMode(true);
+					page.getSettings().setUseWideViewPort(true);
+					page.setInitialScale(0);
+				        // Disable android text auto fit behaviour
+					page.getSettings().setLayoutAlgorithm(WebSettings.LayoutAlgorithm.NORMAL);
 		            		if( showWebViewForDebugging )
-	            	        {
-		            			page.setVisibility(View.VISIBLE);
-	            	        } else {
-	            	        	page.setVisibility(View.INVISIBLE);
-	            	        }
+		            	        {
+			            			page.setVisibility(View.VISIBLE);
+		            	        } else {
+		            	        	page.setVisibility(View.INVISIBLE);
+		            	        }
 		            		
 							// self.cordova.getActivity().addContentView(webView, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
 		            		page.setWebViewClient( new WebViewClient()
+					{
+							public boolean shouldOverrideUrlLoading(WebView view, String url) {
+								return false;
+							}
+	
+							@Override
+							public void onPageFinished(WebView view, String url)
 							{
-									public boolean shouldOverrideUrlLoading(WebView view, String url) {
-										return false;
-									}
-			
-									@Override
-									public void onPageFinished(WebView view, String url)
-									{
-										
-										// Get a PrintManager instance
-										PrintManager printManager = (PrintManager) self.cordova.getActivity()
-												.getSystemService(Context.PRINT_SERVICE);
-			
-										// Get a print adapter instance
-										PrintDocumentAdapter printAdapter = view.createPrintDocumentAdapter();
-										
-						                // Get a print builder attributes instance
-						                PrintAttributes.Builder builder = new PrintAttributes.Builder();
-						                builder.setMinMargins(PrintAttributes.Margins.NO_MARGINS);
-						                // builder.setMediaSize(PrintAttributes.MediaSize.ISO_A4);
-						                // builder.setColorMode(PrintAttributes.COLOR_MODE_COLOR);
-						                // builder.setResolution(new PrintAttributes.Resolution("default", self.tmpPdfName, 600, 600));
-						                
-						                // send success result to cordova
-						                PluginResult result = new PluginResult(PluginResult.Status.OK);
-						                result.setKeepCallback(false); 
-					                    self.callbackContext.sendPluginResult(result);
-						                
-						                // Create & send a print job
-					                    File filePdf = new File(self.tmpPdfName);
-										printManager.print(filePdf.getName(), printAdapter, builder.build());
-										
-										
-										
-									}
-							});
+								
+								// Get a PrintManager instance
+								PrintManager printManager = (PrintManager) self.cordova.getActivity()
+										.getSystemService(Context.PRINT_SERVICE);
+	
+								// Get a print adapter instance
+								PrintDocumentAdapter printAdapter = view.createPrintDocumentAdapter();
+								
+				                // Get a print builder attributes instance
+				                PrintAttributes.Builder builder = new PrintAttributes.Builder();
+				                builder.setMinMargins(PrintAttributes.Margins.NO_MARGINS);
+				                // builder.setMediaSize(PrintAttributes.MediaSize.ISO_A4);
+				                // builder.setColorMode(PrintAttributes.COLOR_MODE_COLOR);
+				                // builder.setResolution(new PrintAttributes.Resolution("default", self.tmpPdfName, 600, 600));
+				                
+				                // send success result to cordova
+				                PluginResult result = new PluginResult(PluginResult.Status.OK);
+				                result.setKeepCallback(false); 
+			                    self.callbackContext.sendPluginResult(result);
+				                
+				                // Create & send a print job
+			                    File filePdf = new File(self.tmpPdfName);
+								printManager.print(filePdf.getName(), printAdapter, builder.build());
+								
+								
+								
+							}
+					});
 							
 							// Reverse engineer base url (assets/www) from the cordova webView url
 					        String baseURL = self.webView.getUrl();
