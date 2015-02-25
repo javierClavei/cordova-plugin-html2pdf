@@ -36,6 +36,7 @@ import android.os.Handler;
 import android.print.PrintAttributes;
 import android.print.PrintDocumentAdapter;
 import android.print.PrintManager;
+
 import android.print.PrintDocumentAdapter.LayoutResultCallback;
 import android.print.PrintAttributes.MediaSize;
 import android.print.PrintDocumentInfo;
@@ -44,6 +45,10 @@ import android.print.PrintDocumentAdapter.WriteResultCallback;
 import android.os.CancellationSignal;
 import android.os.Bundle;
 import android.print.PageRange;
+import android.os.ParcelFileDescriptor;
+import android.print.pdf.PrintedPdfDocument;
+
+
 import android.printservice.PrintJob;
 import android.view.View;
 import android.view.ViewGroup;
@@ -65,6 +70,8 @@ public class Html2pdf extends CordovaPlugin
 	
     // set to true to see the webview (useful for debugging)
     private final boolean showWebViewForDebugging = false;
+    
+    PrintedPdfDocument mPdfDocument;
 	
     /**
     * Constructor.
@@ -99,7 +106,7 @@ public class Html2pdf extends CordovaPlugin
 			        cordova.getActivity().runOnUiThread( new Runnable() {
 			            public void run()
 				    {
-			            	if( Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT1==1 ) // Android 4.4
+			            	if( Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT==1 ) // Android 4.4
 			            	{
 			            		/*
 				            	 * None-Kitkat pdf creation (Android < 4.4)
