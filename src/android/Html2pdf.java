@@ -518,7 +518,7 @@ public class Html2pdf extends CordovaPlugin
 	                     LayoutResultCallback callback,
 	                     Bundle metadata) {
 	    // Create a new PdfDocument with the requested page attributes
-	    mPdfDocument = new PrintedPdfDocument(getActivity(), newAttributes);
+	    mPdfDocument = new PrintedPdfDocument(this.cordova.getActivity(), newAttributes);
 	
 	    // Respond to cancellation request
 	    if (cancellationSignal.isCancelled() ) {
