@@ -56,7 +56,7 @@ public class Html2pdf extends CordovaPlugin
     private String tmpPdfName = "print.pdf";
 	
     // set to true to see the webview (useful for debugging)
-    private final boolean showWebViewForDebugging = false;
+    private final boolean showWebViewForDebugging = true;
 	
     /**
     * Constructor.
@@ -135,7 +135,7 @@ public class Html2pdf extends CordovaPlugin
 							{
 								
 								// Get a PrintManager instance
-								PrintManager printManager = (PrintManager) self.cordova.getActivity()
+								/*PrintManager printManager = (PrintManager) self.cordova.getActivity()
 										.getSystemService(Context.PRINT_SERVICE);
 	
 								// Get a print adapter instance
@@ -155,9 +155,9 @@ public class Html2pdf extends CordovaPlugin
 					                
 					                	// Create & send a print job
 				                    		File filePdf = new File(self.tmpPdfName);
-								printManager.print(filePdf.getName(), printAdapter, null);
+								printManager.print(filePdf.getName(), printAdapter, builder.build());
 								
-								//Create a PdfDocument	
+								*/
 									
 									
 							}
