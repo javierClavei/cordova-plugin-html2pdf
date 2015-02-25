@@ -40,6 +40,7 @@ import android.print.PrintDocumentAdapter.LayoutResultCallback;
 import android.print.PrintAttributes.MediaSize;
 import android.print.PrintDocumentInfo;
 import android.print.PrintDocumentInfo.Builder;
+import android.print.PrintDocumentAdapter.WriteResultCallback;
 import android.printservice.PrintJob;
 import android.view.View;
 import android.view.ViewGroup;
