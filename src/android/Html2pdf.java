@@ -152,30 +152,52 @@ public class Html2pdf extends CordovaPlugin
 							{
 								
 								// Get a PrintManager instance
-								PrintManager printManager = (PrintManager) self.cordova.getActivity()
-										.getSystemService(Context.PRINT_SERVICE);
+								PrintManager printManager = (PrintManager) self.cordova.getActivity().getSystemService(Context.PRINT_SERVICE);
 	
-								// Get a print adapter instance
-								//PrintDocumentAdapter printAdapter = view.createPrintDocumentAdapter();
+								//PrinterAdapter custom para controlar las fases de la creacion del documento
 								 PrintDocumentAdapter adapter = new PrintDocumentAdapter() {
-								            private final PrintDocumentAdapter mWrappedInstance =
-								                    page.createPrintDocumentAdapter();
+								            private final PrintDocumentAdapter mWrappedInstance = page.createPrintDocumentAdapter();
+								            
 								            @Override
 								            public void onStart() {
 								                mWrappedInstance.onStart();
 								            }
+								            
 								            @Override
-								            public void onLayout(PrintAttributes oldAttributes, PrintAttributes newAttributes,
-								                    CancellationSignal cancellationSignal, LayoutResultCallback callback,
-								                    Bundle extras) {
-								                mWrappedInstance.onLayout(oldAttributes, newAttributes, cancellationSignal,
-								                        callback, extras);
+								            public void onLayout(PrintAttributes oldAttributes, PrintAttributes newAttributes,CancellationSignal cancellationSignal, LayoutResultCallback callback,Bundle extras) {								                mWrappedInstance.onLayout(oldAttributes, newAttributes, cancellationSignal,callback, extras);
+								                
+								                mPdfDocument = new PrintedPdfDocument(self.cordova.getActivity(), newAttributes);
+								                
+								                // Respond to cancellation request
+										if (cancellationSignal.isCancelled() ) {
+											callback.onLayoutCancelled();
+											return;
+										}
+										
+										// Compute the expected number of printed pages
+									        int pages = /*computePageCount(newAttributes)*/1;
+									
+									        if (pages > 0) {
+									            // Return print information to print framework
+									            PrintDocumentInfo info = new PrintDocumentInfo
+									                    .Builder("print_output.pdf")
+									                    .setContentType(PrintDocumentInfo.CONTENT_TYPE_DOCUMENT)
+									                    .setPageCount(pages)
+									                    .build();
+									            // Content layout reflow is complete
+									            callback.onLayoutFinished(info, true);
+									        } else {
+									            // Otherwise report an error to the print framework
+									            callback.onLayoutFailed("Page count calculation failed.");
+								    	        }
 								            }
+								            
 								            @Override
 								            public void onWrite(PageRange[] pages, ParcelFileDescriptor destination,
 								                    CancellationSignal cancellationSignal, WriteResultCallback callback) {
 								                mWrappedInstance.onWrite(pages, destination, cancellationSignal, callback);
 								            }
+								            
 								            @Override
 								            public void onFinish() {
 								                mWrappedInstance.onFinish();
