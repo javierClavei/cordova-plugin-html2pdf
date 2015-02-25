@@ -48,7 +48,7 @@ import android.print.PageRange;
 import android.os.ParcelFileDescriptor;
 import android.print.pdf.PrintedPdfDocument;
 import android.util.SparseIntArray;
-import android.print.pdf.PdfDocument.Page;
+import android.graphics.pdf.PdfDocument.Page;
 
 
 import android.printservice.PrintJob;
