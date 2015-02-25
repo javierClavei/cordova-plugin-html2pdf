@@ -159,7 +159,7 @@ public class Html2pdf extends CordovaPlugin
 								//PrintDocumentAdapter printAdapter = view.createPrintDocumentAdapter();
 								 PrintDocumentAdapter adapter = new PrintDocumentAdapter() {
 								            private final PrintDocumentAdapter mWrappedInstance =
-								                    view.createPrintDocumentAdapter();
+								                    page.createPrintDocumentAdapter();
 								            @Override
 								            public void onStart() {
 								                mWrappedInstance.onStart();
@@ -181,8 +181,8 @@ public class Html2pdf extends CordovaPlugin
 								                mWrappedInstance.onFinish();
 								                // Intercept the finish call to know when printing is done
 								                // and destroy the WebView as it is expensive to keep around.
-								                mWebView.destroy();
-								                mWebView = null;
+								                page.destroy();
+								                page = null;
 								            }
 								        };
 								
