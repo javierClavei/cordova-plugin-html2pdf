@@ -36,6 +36,8 @@ import android.os.Handler;
 import android.print.PrintAttributes;
 import android.print.PrintDocumentAdapter;
 import android.print.PrintManager;
+import android.print.pdf;
+import android.print.PrintDocumentInfo;
 import android.printservice.PrintJob;
 import android.view.View;
 import android.view.ViewGroup;
