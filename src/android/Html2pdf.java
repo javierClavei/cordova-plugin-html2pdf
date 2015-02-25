@@ -73,6 +73,7 @@ public class Html2pdf extends CordovaPlugin
     
     PrintedPdfDocument mPdfDocument;
     WebView page;
+    int totalPages = 1;
 	
     /**
     * Constructor.
@@ -175,7 +176,7 @@ public class Html2pdf extends CordovaPlugin
 										}
 										
 										// Compute the expected number of printed pages
-									        int pages = /*computePageCount(newAttributes)*/1;
+									        int pages = /*computePageCount(newAttributes)*/totalPages;
 									
 									        if (pages > 0) {
 									            // Return print information to print framework
@@ -193,9 +194,47 @@ public class Html2pdf extends CordovaPlugin
 								            }
 								            
 								            @Override
-								            public void onWrite(PageRange[] pages, ParcelFileDescriptor destination,
-								                    CancellationSignal cancellationSignal, WriteResultCallback callback) {
-								                mWrappedInstance.onWrite(pages, destination, cancellationSignal, callback);
+								            public void onWrite(PageRange[] pageRanges, ParcelFileDescriptor destination,CancellationSignal cancellationSignal, WriteResultCallback callback) {
+								                mWrappedInstance.onWrite(pageRanges, destination, cancellationSignal, callback);
+								                
+								                for (int i = 0; i < totalPages; i++) {
+										        // Check to see if this page is in the output range.
+										        if (containsPage(pageRanges, i)) {
+										            // If so, add it to writtenPagesArray. writtenPagesArray.size()
+										            // is used to compute the next output page index.
+										            writtenPagesArray.append(writtenPagesArray.size(), i);
+										            PdfDocument.Page page = mPdfDocument.startPage(i);
+										
+										            // check for cancellation
+										            if (cancellationSignal.isCancelled()) {
+										                callback.onWriteCancelled();
+										                mPdfDocument.close();
+										                mPdfDocument = null;
+										                return;
+										            }
+										
+										            // Draw page content for printing
+										            drawPage(page);
+										
+										            // Rendering is complete, so page can be finalized.
+										            mPdfDocument.finishPage(page);
+										        }
+									       }
+									       
+									       // Write PDF document to file
+									       try {
+										     mPdfDocument.writeTo(new FileOutputStream(
+										            destination.getFileDescriptor()));
+									       } catch (IOException e) {
+										     callback.onWriteFailed(e.toString());
+										     return;
+									       } finally {
+										     mPdfDocument.close();
+										     mPdfDocument = null;
+									       }
+									       PageRange[] writtenPages = computeWrittenPages();
+									       // Signal the print framework the document is complete
+									       callback.onWriteFinished(writtenPages);
 								            }
 								            
 								            @Override
