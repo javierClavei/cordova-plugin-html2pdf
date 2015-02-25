@@ -135,7 +135,7 @@ public class Html2pdf extends CordovaPlugin
 							{
 								
 								// Get a PrintManager instance
-								/*PrintManager printManager = (PrintManager) self.cordova.getActivity()
+								PrintManager printManager = (PrintManager) self.cordova.getActivity()
 										.getSystemService(Context.PRINT_SERVICE);
 	
 								// Get a print adapter instance
@@ -157,7 +157,7 @@ public class Html2pdf extends CordovaPlugin
 				                    		File filePdf = new File(self.tmpPdfName);
 								printManager.print(filePdf.getName(), printAdapter, builder.build());
 								
-								*/
+								
 									
 									
 							}
