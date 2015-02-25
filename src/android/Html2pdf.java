@@ -72,6 +72,7 @@ public class Html2pdf extends CordovaPlugin
     private final boolean showWebViewForDebugging = false;
     
     PrintedPdfDocument mPdfDocument;
+    WebView page;
 	
     /**
     * Constructor.
@@ -122,7 +123,7 @@ public class Html2pdf extends CordovaPlugin
 				            	 */
 			            		
 						// Create a WebView object specifically for printing
-						WebView page = new WebView(cordova.getActivity());
+						page = new WebView(cordova.getActivity());
 						page.getSettings().setJavaScriptEnabled(false);
 						page.setDrawingCacheEnabled(true);
 					        // Auto-scale the content to the webview's width.
@@ -517,6 +518,8 @@ public class Html2pdf extends CordovaPlugin
 	                     CancellationSignal cancellationSignal,
 	                     LayoutResultCallback callback,
 	                     Bundle metadata) {
+	                     	
+	    page.onLayout(oldAttributes,newAttributes,cancellationSignal,callback,metadata);
 	                     	
 	               	
 	    // Create a new PdfDocument with the requested page attributes
