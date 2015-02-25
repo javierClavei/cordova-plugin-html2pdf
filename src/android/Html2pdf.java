@@ -210,7 +210,7 @@ public class Html2pdf extends CordovaPlugin
 									     
 									     @Override
 									     public void onWrite(final PageRange[] pageRanges,final ParcelFileDescriptor destination,final CancellationSignal cancellationSignal,final WriteResultCallback callback) {
-										    
+									     {	    
 										    printAdapter.onWrite(pageRanges,destination,cancellationSignal,callback);
 										    // Iterate over each page of the document,
 										    // check if it's in the output range.
