@@ -197,15 +197,14 @@ public class Html2pdf extends CordovaPlugin
 								            public void onWrite(PageRange[] pageRanges, ParcelFileDescriptor destination,CancellationSignal cancellationSignal, WriteResultCallback callback) {
 								                mWrappedInstance.onWrite(pageRanges, destination, cancellationSignal, callback);
 								                
-								                final SparseIntArray writtenPagesArray = new SparseIntArray();
 								                
-								                for (int i = 0; i < totalPages; i++) {
+								                /*for (int i = 0; i < totalPages; i++) {
 										        // Check to see if this page is in the output range.
 										        if (containsPage(pageRanges, i)) {
 										            // If so, add it to writtenPagesArray. writtenPagesArray.size()
 										            // is used to compute the next output page index.
 										            writtenPagesArray.append(writtenPagesArray.size(), i);
-										            mPdfDocument.Page page = mPdfDocument.startPage(i);
+										            PdfDocument.Page page = mPdfDocument.startPage(i);
 										
 										            // check for cancellation
 										            if (cancellationSignal.isCanceled()) {
@@ -221,7 +220,7 @@ public class Html2pdf extends CordovaPlugin
 										            // Rendering is complete, so page can be finalized.
 										            mPdfDocument.finishPage(page);
 										        }
-									       }
+									       }*/
 									       
 									       // Write PDF document to file
 									       try {
