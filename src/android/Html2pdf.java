@@ -521,7 +521,7 @@ public class Html2pdf extends CordovaPlugin
 	    mPdfDocument = new PrintedPdfDocument(this.cordova.getActivity(), newAttributes);
 	
 	    // Respond to cancellation request
-	    if (cancellationSignal.isCancelled() ) {
+	    if (cancellationSignal.isCanceled() ) {
 	        callback.onLayoutCancelled();
 	        return;
 	    }
@@ -577,7 +577,7 @@ public class Html2pdf extends CordovaPlugin
 	            PdfDocument.Page page = mPdfDocument.startPage(i);
 	
 	            // check for cancellation
-	            if (cancellationSignal.isCancelled()) {
+	            if (cancellationSignal.isCanceled()) {
 	                callback.onWriteCancelled();
 	                mPdfDocument.close();
 	                mPdfDocument = null;
