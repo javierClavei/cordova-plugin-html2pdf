@@ -235,7 +235,6 @@ public class Html2pdf extends CordovaPlugin
 									       }
 									       //PageRange[] writtenPages = computeWrittenPages();
 									       //callback.onWriteFinished(writtenPages);
-									       callback.onWriteCancelled();
 								            }
 								            
 								            @Override
