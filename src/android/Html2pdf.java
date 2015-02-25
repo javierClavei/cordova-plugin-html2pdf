@@ -156,7 +156,35 @@ public class Html2pdf extends CordovaPlugin
 										.getSystemService(Context.PRINT_SERVICE);
 	
 								// Get a print adapter instance
-								PrintDocumentAdapter printAdapter = view.createPrintDocumentAdapter();
+								//PrintDocumentAdapter printAdapter = view.createPrintDocumentAdapter();
+								 PrintDocumentAdapter adapter = new PrintDocumentAdapter() {
+								            private final PrintDocumentAdapter mWrappedInstance =
+								                    view.createPrintDocumentAdapter();
+								            @Override
+								            public void onStart() {
+								                mWrappedInstance.onStart();
+								            }
+								            @Override
+								            public void onLayout(PrintAttributes oldAttributes, PrintAttributes newAttributes,
+								                    CancellationSignal cancellationSignal, LayoutResultCallback callback,
+								                    Bundle extras) {
+								                mWrappedInstance.onLayout(oldAttributes, newAttributes, cancellationSignal,
+								                        callback, extras);
+								            }
+								            @Override
+								            public void onWrite(PageRange[] pages, ParcelFileDescriptor destination,
+								                    CancellationSignal cancellationSignal, WriteResultCallback callback) {
+								                mWrappedInstance.onWrite(pages, destination, cancellationSignal, callback);
+								            }
+								            @Override
+								            public void onFinish() {
+								                mWrappedInstance.onFinish();
+								                // Intercept the finish call to know when printing is done
+								                // and destroy the WebView as it is expensive to keep around.
+								                mWebView.destroy();
+								                mWebView = null;
+								            }
+								        };
 								
 								
 						                // send success result to cordova
@@ -166,7 +194,7 @@ public class Html2pdf extends CordovaPlugin
 					                
 					                	// Create & send a print job
 				                    		File filePdf = new File(self.tmpPdfName);
-								printManager.print(filePdf.getName(), printAdapter, /*builder.build()*/null);
+								printManager.print(filePdf.getName(), adapter, null);
 									
 									
 							}
