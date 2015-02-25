@@ -56,7 +56,7 @@ public class Html2pdf extends CordovaPlugin
     private String tmpPdfName = "print.pdf";
 	
     // set to true to see the webview (useful for debugging)
-    private final boolean showWebViewForDebugging = true;
+    private final boolean showWebViewForDebugging = false;
 	
     /**
     * Constructor.
@@ -91,7 +91,7 @@ public class Html2pdf extends CordovaPlugin
 			        cordova.getActivity().runOnUiThread( new Runnable() {
 			            public void run()
 				    {
-			            	if( Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT ) // Android 4.4
+			            	if( /*Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT*/1==1 ) // Android 4.4
 			            	{
 			            		/*
 				            	 * None-Kitkat pdf creation (Android < 4.4)
@@ -155,7 +155,7 @@ public class Html2pdf extends CordovaPlugin
 					                
 					                	// Create & send a print job
 				                    		File filePdf = new File(self.tmpPdfName);
-								printManager.print(filePdf.getName(), printAdapter, null);
+								printManager.print(filePdf.getName(), printAdapter, builder.build());
 								
 								
 									
