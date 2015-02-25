@@ -521,7 +521,7 @@ public class Html2pdf extends CordovaPlugin
 	        PrintDocumentInfo info = new PrintDocumentInfo
 	                .Builder("print_output.pdf")
 	                .setContentType(PrintDocumentInfo.CONTENT_TYPE_DOCUMENT)
-	                .setPageCount(pages);
+	                .setPageCount(pages)
 	                .build();
 	        // Content layout reflow is complete
 	        callback.onLayoutFinished(info, true);
