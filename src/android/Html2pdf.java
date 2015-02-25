@@ -233,9 +233,9 @@ public class Html2pdf extends CordovaPlugin
 										     mPdfDocument.close();
 										     mPdfDocument = null;
 									       }
-									       PageRange[] writtenPages = computeWrittenPages();
-									       // Signal the print framework the document is complete
-									       callback.onWriteFinished(writtenPages);
+									       //PageRange[] writtenPages = computeWrittenPages();
+									       //callback.onWriteFinished(writtenPages);
+									       callback.onWriteCancelled();
 								            }
 								            
 								            @Override
