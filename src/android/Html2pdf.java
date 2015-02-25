@@ -49,6 +49,8 @@ import android.os.ParcelFileDescriptor;
 import android.print.pdf.PrintedPdfDocument;
 import android.util.SparseIntArray;
 import android.graphics.pdf.PdfDocument.Page;
+import android.graphics.Canvas;
+import android.graphics.Paint;
 
 
 import android.printservice.PrintJob;
@@ -259,6 +261,25 @@ public class Html2pdf extends CordovaPlugin
 								                    }
 								                    return false;
 								            }
+								            
+								            private void drawPage(PdfDocument.Page page) {
+										    Canvas canvas = page.getCanvas();
+										
+										    // units are in points (1/72 of an inch)
+										    int titleBaseLine = 72;
+										    int leftMargin = 54;
+										
+										    Paint paint = new Paint();
+										    paint.setColor(Color.BLACK);
+										    paint.setTextSize(36);
+										    canvas.drawText("Test Title", leftMargin, titleBaseLine, paint);
+										
+										    paint.setTextSize(11);
+										    canvas.drawText("Test paragraph", leftMargin, titleBaseLine + 25, paint);
+										
+										    paint.setColor(Color.BLUE);
+										    canvas.drawRect(100, 100, 172, 172, paint);
+									    }
 								        };
 								
 								
