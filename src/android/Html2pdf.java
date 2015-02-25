@@ -33,7 +33,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
 import android.os.Handler;
-import android.print;
+import android.print.*;
 import android.printservice.PrintJob;
 import android.view.View;
 import android.view.ViewGroup;
