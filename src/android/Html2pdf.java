@@ -48,22 +48,22 @@ import android.util.Log;
 @TargetApi(19)
 public class Html2pdf extends CordovaPlugin
 {
-	private static final String LOG_TAG = "Html2Pdf";
-	private CallbackContext callbackContext;
+    private static final String LOG_TAG = "Html2Pdf";
+    private CallbackContext callbackContext;
 	
-	// change your path on the sdcard here
-	private String publicTmpDir = ".at.modalog.cordova.plugin.html2pdf"; // prepending a dot "." would make it hidden
-	private String tmpPdfName = "print.pdf";
+    // change your path on the sdcard here
+    private String publicTmpDir = ".at.modalog.cordova.plugin.html2pdf"; // prepending a dot "." would make it hidden
+    private String tmpPdfName = "print.pdf";
 	
-	// set to true to see the webview (useful for debugging)
-    	private final boolean showWebViewForDebugging = true;
-
-	/**
-	 * Constructor.
-	 */
-	public Html2pdf() {
-
-	}
+    // set to true to see the webview (useful for debugging)
+    private final boolean showWebViewForDebugging = true;
+	
+    /**
+    * Constructor.
+    */
+    public Html2pdf() {
+	
+    }
 
     @Override
     public boolean execute (String action, JSONArray args, CallbackContext callbackContext) throws JSONException
