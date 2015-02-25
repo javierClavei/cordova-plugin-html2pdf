@@ -51,6 +51,7 @@ import android.util.SparseIntArray;
 import android.graphics.pdf.PdfDocument.Page;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.graphics.Color;
 
 
 import android.printservice.PrintJob;
@@ -219,7 +220,7 @@ public class Html2pdf extends CordovaPlugin
 										            }
 										
 										            // Draw page content for printing
-										            //drawPage(page);
+										            drawPage(page);
 										
 										            // Rendering is complete, so page can be finalized.
 										            mPdfDocument.finishPage(page);
@@ -262,7 +263,7 @@ public class Html2pdf extends CordovaPlugin
 								                    return false;
 								            }
 								            
-								            private void drawPage(PdfDocument.Page page) {
+								            private void drawPage(Page page) {
 										    Canvas canvas = page.getCanvas();
 										
 										    // units are in points (1/72 of an inch)
