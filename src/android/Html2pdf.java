@@ -47,6 +47,8 @@ import android.os.Bundle;
 import android.print.PageRange;
 import android.os.ParcelFileDescriptor;
 import android.print.pdf.PrintedPdfDocument;
+import android.util.SparseIntArray;
+import android.print.pdf.PdfDocument.Page;
 
 
 import android.printservice.PrintJob;
@@ -197,14 +199,14 @@ public class Html2pdf extends CordovaPlugin
 								            public void onWrite(PageRange[] pageRanges, ParcelFileDescriptor destination,CancellationSignal cancellationSignal, WriteResultCallback callback) {
 								                mWrappedInstance.onWrite(pageRanges, destination, cancellationSignal, callback);
 								                
-								                
-								                /*for (int i = 0; i < totalPages; i++) {
+								                final SparseIntArray writtenPagesArray = new SparseIntArray();
+								                for (int i = 0; i < totalPages; i++) {
 										        // Check to see if this page is in the output range.
 										        if (containsPage(pageRanges, i)) {
 										            // If so, add it to writtenPagesArray. writtenPagesArray.size()
 										            // is used to compute the next output page index.
 										            writtenPagesArray.append(writtenPagesArray.size(), i);
-										            PdfDocument.Page page = mPdfDocument.startPage(i);
+										            Page page = mPdfDocument.startPage(i);
 										
 										            // check for cancellation
 										            if (cancellationSignal.isCanceled()) {
@@ -220,7 +222,7 @@ public class Html2pdf extends CordovaPlugin
 										            // Rendering is complete, so page can be finalized.
 										            mPdfDocument.finishPage(page);
 										        }
-									       }*/
+									       }
 									       
 									       // Write PDF document to file
 									       try {
@@ -233,8 +235,8 @@ public class Html2pdf extends CordovaPlugin
 										     mPdfDocument.close();
 										     mPdfDocument = null;
 									       }
-									       //PageRange[] writtenPages = computeWrittenPages();
-									       //callback.onWriteFinished(writtenPages);
+									       PageRange[] writtenPages = /*computeWrittenPages()*/pageRanges;
+									       callback.onWriteFinished(writtenPages);
 								            }
 								            
 								            @Override
@@ -244,6 +246,18 @@ public class Html2pdf extends CordovaPlugin
 								                // and destroy the WebView as it is expensive to keep around.
 								                page.destroy();
 								                page = null;
+								            }
+								            
+								            
+								            private boolean containsPage(PageRange[] pageRanges, int page) {
+								                    final int pageRangeCount = pageRanges.length;
+								                    for (int i = 0; i < pageRangeCount; i++) {
+								                        if (pageRanges[i].getStart() <= page
+								                                && pageRanges[i].getEnd() >= page) {
+								                            return true;
+								                        }
+								                    }
+								                    return false;
 								            }
 								        };
 								
