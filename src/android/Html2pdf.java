@@ -229,8 +229,9 @@ public class Html2pdf extends CordovaPlugin
 									       
 									       // Write PDF document to file
 									       try {
-										     mPdfDocument.writeTo(new FileOutputStream(
-										            destination.getFileDescriptor()));
+										     //mPdfDocument.writeTo(new FileOutputStream(destination.getFileDescriptor()));
+										     File myFile = new File("/sdcard/mipdf.pdf");
+										     mPdfDocument.writeTo(new FileOutputStream(myFile));
 									       } catch (IOException e) {
 										     callback.onWriteFailed(e.toString());
 										     return;
