@@ -165,7 +165,7 @@ public class Html2pdf extends CordovaPlugin
 							@Override
 							public void onPageFinished(WebView webView, String url)
 							{
-								View content = (View) webView;
+								/*View content = (View) webView;
 							        PrintAttributes pdfPrintAttrs = new PrintAttributes.Builder().
 							                setColorMode(PrintAttributes.COLOR_MODE_MONOCHROME).
 							                setMediaSize(PrintAttributes.MediaSize.NA_LETTER.asLandscape()).
@@ -176,9 +176,9 @@ public class Html2pdf extends CordovaPlugin
 							        PageInfo pageInfo = new PageInfo.Builder(webView.getMeasuredWidth(), webView.getContentHeight(), 1).create();
 							        Page page = document.startPage(pageInfo);
 							        content.draw(page.getCanvas());
-							        document.finishPage(page);
+							        document.finishPage(page);*/
 							        
-							        try{
+							        /*try{
 							             File myFile = new File("/sdcard/pepe.pdf");
 							             document.writeTo(new FileOutputStream(myFile));
 							        } catch (IOException e) {
@@ -186,7 +186,7 @@ public class Html2pdf extends CordovaPlugin
 							        } finally {
 								     document.close();
 								     document = null;
-							        }
+							        }*/
 								
 						                // send success result to cordova
 						                PluginResult result = new PluginResult(PluginResult.Status.OK);
