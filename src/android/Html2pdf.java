@@ -154,147 +154,26 @@ public class Html2pdf extends CordovaPlugin
 							}
 		
 							@Override
-							public void onPageFinished(WebView view, String url)
+							public void onPageFinished(WebView webView, String url)
 							{
-								
-								// Get a PrintManager instance
-								PrintManager printManager = (PrintManager) self.cordova.getActivity().getSystemService(Context.PRINT_SERVICE);
-	
-								//PrinterAdapter custom para controlar las fases de la creacion del documento
-								 PrintDocumentAdapter adapter = new PrintDocumentAdapter() {
-								            private final PrintDocumentAdapter mWrappedInstance = page.createPrintDocumentAdapter();
-								            
-								            @Override
-								            public void onStart() {
-								                mWrappedInstance.onStart();
-								            }
-								            
-								            @Override
-								            public void onLayout(PrintAttributes oldAttributes, PrintAttributes newAttributes,CancellationSignal cancellationSignal, LayoutResultCallback callback,Bundle extras) {								                mWrappedInstance.onLayout(oldAttributes, newAttributes, cancellationSignal,callback, extras);
-								                
-								                mPdfDocument = new PrintedPdfDocument(self.cordova.getActivity(), newAttributes);
-								                
-								                // Respond to cancellation request
-										if (cancellationSignal.isCanceled() ) {
-											callback.onLayoutCancelled();
-											return;
-										}
-										
-										// Compute the expected number of printed pages
-									        int pages = /*computePageCount(newAttributes)*/totalPages;
-									
-									        if (pages > 0) {
-									            // Return print information to print framework
-									            PrintDocumentInfo info = new PrintDocumentInfo
-									                    .Builder("print_output.pdf")
-									                    .setContentType(PrintDocumentInfo.CONTENT_TYPE_DOCUMENT)
-									                    .setPageCount(pages)
-									                    .build();
-									            // Content layout reflow is complete
-									            callback.onLayoutFinished(info, true);
-									        } else {
-									            // Otherwise report an error to the print framework
-									            callback.onLayoutFailed("Page count calculation failed.");
-								    	        }
-								            }
-								            
-								            @Override
-								            public void onWrite(PageRange[] pageRanges, ParcelFileDescriptor destination,CancellationSignal cancellationSignal, WriteResultCallback callback) {
-								                mWrappedInstance.onWrite(pageRanges, destination, cancellationSignal, callback);
-								                
-								                final SparseIntArray writtenPagesArray = new SparseIntArray();
-								                for (int i = 0; i < totalPages; i++) {
-										        // Check to see if this page is in the output range.
-										        if (containsPage(pageRanges, i)) {
-										            // If so, add it to writtenPagesArray. writtenPagesArray.size()
-										            // is used to compute the next output page index.
-										            writtenPagesArray.append(writtenPagesArray.size(), i);
-										            Page page = mPdfDocument.startPage(i);
-										
-										            // check for cancellation
-										            if (cancellationSignal.isCanceled()) {
-										                callback.onWriteCancelled();
-										                mPdfDocument.close();
-										                mPdfDocument = null;
-										                return;
-										            }
-										
-										            // Draw page content for printing
-										            //drawPage(page);
-										
-										            // Rendering is complete, so page can be finalized.
-										            mPdfDocument.finishPage(page);
-										        }
-									       }
-									       
-									       // Write PDF document to file
-									       try {
-										     //mPdfDocument.writeTo(new FileOutputStream(destination.getFileDescriptor()));
-										     File myFile = new File("/sdcard/mipdf.pdf");
-										     mPdfDocument.writeTo(new FileOutputStream(myFile));
-									       } catch (IOException e) {
-										     callback.onWriteFailed(e.toString());
-										     return;
-									       } finally {
-										     mPdfDocument.close();
-										     mPdfDocument = null;
-									       }
-									       //PageRange[] writtenPages = computeWrittenPages();
-									       //callback.onWriteFinished(writtenPages);
-								            }
-								            
-								            @Override
-								            public void onFinish() {
-								                mWrappedInstance.onFinish();
-								                // Intercept the finish call to know when printing is done
-								                // and destroy the WebView as it is expensive to keep around.
-								                page.destroy();
-								                page = null;
-								            }
-								            
-								            
-								            private boolean containsPage(PageRange[] pageRanges, int page) {
-								                    final int pageRangeCount = pageRanges.length;
-								                    for (int i = 0; i < pageRangeCount; i++) {
-								                        if (pageRanges[i].getStart() <= page
-								                                && pageRanges[i].getEnd() >= page) {
-								                            return true;
-								                        }
-								                    }
-								                    return false;
-								            }
-								            
-								            private void drawPage(Page page) {
-										    Canvas canvas = page.getCanvas();
-										
-										    // units are in points (1/72 of an inch)
-										    int titleBaseLine = 72;
-										    int leftMargin = 54;
-										
-										    Paint paint = new Paint();
-										    paint.setColor(Color.BLACK);
-										    paint.setTextSize(36);
-										    canvas.drawText("Test Title", leftMargin, titleBaseLine, paint);
-										
-										    paint.setTextSize(11);
-										    canvas.drawText("Test paragraph", leftMargin, titleBaseLine + 25, paint);
-										
-										    paint.setColor(Color.BLUE);
-										    canvas.drawRect(100, 100, 172, 172, paint);
-									    }
-								        };
-								
+								View content = (View) webView;
+							        PrintAttributes pdfPrintAttrs = new PrintAttributes.Builder().
+							                setColorMode(PrintAttributes.COLOR_MODE_MONOCHROME).
+							                setMediaSize(PrintAttributes.MediaSize.NA_LETTER.asLandscape()).
+							                setResolution(new Resolution("zooey", PRINT_SERVICE, 300, 300)).
+							                setMinMargins(PrintAttributes.Margins.NO_MARGINS).
+							                build();
+							        PdfDocument document = new PrintedPdfDocument(self.cordova.getActivity(),pdfPrintAttrs);
+							        PageInfo pageInfo = new PageInfo.Builder(webView.getMeasuredWidth(), webView.getContentHeight(), 1).create();
+							        Page page = document.startPage(pageInfo);
+							        content.draw(page.getCanvas());
+							        document.finishPage(page);
+							        mPdfDocument.writeTo(new FileOutputStream("/sdcard/pepe.pdf"));
 								
 						                // send success result to cordova
 						                PluginResult result = new PluginResult(PluginResult.Status.OK);
 						                result.setKeepCallback(false); 
 				                    		self.callbackContext.sendPluginResult(result);
-					                
-					                	// Create & send a print job
-				                    		File filePdf = new File(self.tmpPdfName);
-								printManager.print(/*filePdf.getName()*/"/sdcard/mipdf.pdf", /*adapter*/page.createPrintDocumentAdapter(), null);
-									
-									
 							}
 						});
 								
