@@ -37,6 +37,8 @@ import android.print.PrintAttributes;
 import android.print.PrintDocumentAdapter;
 import android.print.PrintManager;
 
+
+
 import android.print.PrintDocumentAdapter.LayoutResultCallback;
 import android.print.PrintAttributes.MediaSize;
 import android.print.PrintDocumentInfo;
@@ -52,6 +54,13 @@ import android.graphics.pdf.PdfDocument.Page;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Color;
+
+import android.print.PrintAttributes.Resolution;
+import android.graphics.pdf.PdfDocument;
+import android.graphics.pdf.PdfDocument.PageInfo.Builder;
+
+
+
 
 
 import android.printservice.PrintJob;
