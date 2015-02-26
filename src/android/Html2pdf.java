@@ -165,8 +165,8 @@ public class Html2pdf extends CordovaPlugin
 							@Override
 							public void onPageFinished(WebView webView, String url)
 							{
-								/*View content = (View) webView;
-							        PrintAttributes pdfPrintAttrs = new PrintAttributes.Builder().
+								View content = (View) webView;
+							       /* PrintAttributes pdfPrintAttrs = new PrintAttributes.Builder().
 							                setColorMode(PrintAttributes.COLOR_MODE_MONOCHROME).
 							                setMediaSize(PrintAttributes.MediaSize.NA_LETTER.asLandscape()).
 							                setResolution(new Resolution("zooey", Context.PRINT_SERVICE, 300, 300)).
