@@ -166,13 +166,13 @@ public class Html2pdf extends CordovaPlugin
 							public void onPageFinished(WebView webView, String url)
 							{
 								View content = (View) webView;
-							       /* PrintAttributes pdfPrintAttrs = new PrintAttributes.Builder().
+							        PrintAttributes pdfPrintAttrs = new PrintAttributes.Builder().
 							                setColorMode(PrintAttributes.COLOR_MODE_MONOCHROME).
 							                setMediaSize(PrintAttributes.MediaSize.NA_LETTER.asLandscape()).
 							                setResolution(new Resolution("zooey", Context.PRINT_SERVICE, 300, 300)).
 							                setMinMargins(PrintAttributes.Margins.NO_MARGINS).
 							                build();
-							        PdfDocument document = new PrintedPdfDocument(self.cordova.getActivity(),pdfPrintAttrs);
+							        /*PdfDocument document = new PrintedPdfDocument(self.cordova.getActivity(),pdfPrintAttrs);
 							        PageInfo pageInfo = new PageInfo.Builder(webView.getMeasuredWidth(), webView.getContentHeight(), 1).create();
 							        Page page = document.startPage(pageInfo);
 							        content.draw(page.getCanvas());
