@@ -177,7 +177,7 @@ public class Html2pdf extends CordovaPlugin
 							        Page page = document.startPage(pageInfo);
 							        content.draw(page.getCanvas());
 							        document.finishPage(page);
-							        mPdfDocument.writeTo(new FileOutputStream("/sdcard/pepe.pdf"));
+							        document.writeTo(new FileOutputStream("/sdcard/pepe.pdf"));
 								
 						                // send success result to cordova
 						                PluginResult result = new PluginResult(PluginResult.Status.OK);
