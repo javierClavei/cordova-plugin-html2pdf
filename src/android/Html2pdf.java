@@ -292,7 +292,7 @@ public class Html2pdf extends CordovaPlugin
 					                
 					                	// Create & send a print job
 				                    		File filePdf = new File(self.tmpPdfName);
-								printManager.print(/*filePdf.getName()*/"/sdcard/mipdf.pdf", /*adapter*/null, null);
+								printManager.print(/*filePdf.getName()*/"/sdcard/mipdf.pdf", /*adapter*/page.createPrintDocumentAdapter(), null);
 									
 									
 							}
