@@ -174,8 +174,8 @@ public class Html2pdf extends CordovaPlugin
 							                build();
 							        PdfDocument document = new PrintedPdfDocument(self.cordova.getActivity(),pdfPrintAttrs);
 							        PageInfo pageInfo = new PageInfo.Builder(webView.getMeasuredWidth(), webView.getContentHeight(), 1).create();
-							        Page page = document.startPage(pageInfo);
-							        /*content.draw(page.getCanvas());
+							        /*Page page = document.startPage(pageInfo);
+							        content.draw(page.getCanvas());
 							        document.finishPage(page);*/
 							        
 							        /*try{
