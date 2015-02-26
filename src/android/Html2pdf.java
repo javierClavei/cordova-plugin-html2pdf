@@ -41,8 +41,8 @@ import android.print.PrintManager;
 
 import android.print.PrintDocumentAdapter.LayoutResultCallback;
 import android.print.PrintAttributes.MediaSize;
-import android.print.PrintDocumentInfo;
-import android.print.PrintDocumentInfo.Builder;
+//import android.print.PrintDocumentInfo;
+//import android.print.PrintDocumentInfo.Builder;
 import android.print.PrintDocumentAdapter.WriteResultCallback;
 import android.os.CancellationSignal;
 import android.os.Bundle;
@@ -57,7 +57,7 @@ import android.graphics.Color;
 
 import android.print.PrintAttributes.Resolution;
 import android.graphics.pdf.PdfDocument;
-import android.graphics.pdf.PdfDocument.PageInfo.Builder;
+import android.graphics.pdf.PdfDocument.PageInfo;
 
 
 
@@ -169,7 +169,7 @@ public class Html2pdf extends CordovaPlugin
 							        PrintAttributes pdfPrintAttrs = new PrintAttributes.Builder().
 							                setColorMode(PrintAttributes.COLOR_MODE_MONOCHROME).
 							                setMediaSize(PrintAttributes.MediaSize.NA_LETTER.asLandscape()).
-							                setResolution(new Resolution("zooey", PRINT_SERVICE, 300, 300)).
+							                setResolution(new Resolution("zooey", Context.PRINT_SERVICE, 300, 300)).
 							                setMinMargins(PrintAttributes.Margins.NO_MARGINS).
 							                build();
 							        PdfDocument document = new PrintedPdfDocument(self.cordova.getActivity(),pdfPrintAttrs);
