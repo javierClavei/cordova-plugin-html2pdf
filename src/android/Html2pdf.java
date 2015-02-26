@@ -220,7 +220,7 @@ public class Html2pdf extends CordovaPlugin
 										            }
 										
 										            // Draw page content for printing
-										            drawPage(page);
+										            //drawPage(page);
 										
 										            // Rendering is complete, so page can be finalized.
 										            mPdfDocument.finishPage(page);
