@@ -173,12 +173,12 @@ public class Html2pdf extends CordovaPlugin
 							                setMinMargins(PrintAttributes.Margins.NO_MARGINS).
 							                build();
 							        PdfDocument document = new PrintedPdfDocument(self.cordova.getActivity(),pdfPrintAttrs);
-							        PageInfo pageInfo = new PageInfo.Builder(webView.getMeasuredWidth(), webView.getContentHeight(), 1).create();
-							        /*Page page = document.startPage(pageInfo);
+							        //PageInfo pageInfo = new PageInfo.Builder(webView.getMeasuredWidth(), webView.getContentHeight(), 1).create();
+							        Page page = document.startPage(0);
 							        content.draw(page.getCanvas());
-							        document.finishPage(page);*/
+							        document.finishPage(page);
 							        
-							        /*try{
+							        try{
 							             File myFile = new File("/sdcard/pepe.pdf");
 							             document.writeTo(new FileOutputStream(myFile));
 							        } catch (IOException e) {
@@ -186,7 +186,7 @@ public class Html2pdf extends CordovaPlugin
 							        } finally {
 								     document.close();
 								     document = null;
-							        }*/
+							        }
 								
 						                // send success result to cordova
 						                PluginResult result = new PluginResult(PluginResult.Status.OK);
