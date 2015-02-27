@@ -188,8 +188,7 @@ public class Html2pdf extends CordovaPlugin
 								     doc.writeTo(out);
 								     out.close();
 								     doc.close();
-							        catch(Exception e)
-								{
+							        } catch(Exception e){
 								     throw new RuntimeException("Error generating file", e);
 							        } finally {
 								     //documento.close();
