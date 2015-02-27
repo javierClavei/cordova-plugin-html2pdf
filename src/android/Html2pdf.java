@@ -176,18 +176,24 @@ public class Html2pdf extends CordovaPlugin
 							        
 							        PageInfo pageInfo = new PageInfo.Builder(595,842, 1).create();
 							        Page pagina = documento.startPage(pageInfo);
+							        pagina.getCanvas().setDensity(200);
 							        //View content = (View) webView;
 							        webView.draw(pagina.getCanvas());
 							        documento.finishPage(pagina);
 							        
 							        try{
-							             File myFile = new File("/sdcard/pepe.pdf");
-							             documento.writeTo(new FileOutputStream(myFile));
-							        } catch (IOException e) {
-								     return;
+							             File root = Environment.getExternalStorageDirectory();          
+								     File file = new File(root,"webview.pdf");
+								     FileOutputStream out = new FileOutputStream(file);
+								     doc.writeTo(out);
+								     out.close();
+								     doc.close();
+							        catch(Exception e)
+								{
+								     throw new RuntimeException("Error generating file", e);
 							        } finally {
-								     documento.close();
-								     documento = null;
+								     //documento.close();
+								     //documento = null;
 							        }
 								
 						                // send success result to cordova
