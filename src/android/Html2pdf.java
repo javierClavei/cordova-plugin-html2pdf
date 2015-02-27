@@ -83,7 +83,7 @@ public class Html2pdf extends CordovaPlugin
     private String tmpPdfName = "print.pdf";
 	
     // set to true to see the webview (useful for debugging)
-    private final boolean showWebViewForDebugging = false;
+    private final boolean showWebViewForDebugging = true;
     
     PrintedPdfDocument mPdfDocument;
     WebView page;
@@ -165,7 +165,6 @@ public class Html2pdf extends CordovaPlugin
 							@Override
 							public void onPageFinished(WebView webView, String url)
 							{
-								View content = (View) webView;
 							        /*PrintAttributes pdfPrintAttrs = new PrintAttributes.Builder().
 							                setColorMode(PrintAttributes.COLOR_MODE_MONOCHROME).
 							                setMediaSize(PrintAttributes.MediaSize.NA_LETTER.asLandscape()).
@@ -173,12 +172,13 @@ public class Html2pdf extends CordovaPlugin
 							                setMinMargins(PrintAttributes.Margins.NO_MARGINS).
 							                build();
 							        PdfDocument document = new PrintedPdfDocument(self.cordova.getActivity(),pdfPrintAttrs);*/
-							        PdfDocument document = new PdfDocument();
+							        PdfDocument documento = new PdfDocument();
 							        
 							        PageInfo pageInfo = new PageInfo.Builder(595,842, 1).create();
-							        Page pagina = document.startPage(pageInfo);
-							        content.draw(pagina.getCanvas());
-							        document.finishPage(pagina);
+							        Page pagina = documento.startPage(pageInfo);
+							        //View content = (View) webView;
+							        webView.draw(pagina.getCanvas());
+							        documento.finishPage(pagina);
 							        
 							        try{
 							             File myFile = new File("/sdcard/pepe.pdf");
@@ -186,8 +186,8 @@ public class Html2pdf extends CordovaPlugin
 							        } catch (IOException e) {
 								     return;
 							        } finally {
-								     document.close();
-								     document = null;
+								     documento.close();
+								     documento = null;
 							        }
 								
 						                // send success result to cordova
@@ -195,7 +195,7 @@ public class Html2pdf extends CordovaPlugin
 						                result.setKeepCallback(false); 
 				                    		self.callbackContext.sendPluginResult(result);
 							}
-						});
+						});//end webview client
 								
 						// Reverse engineer base url (assets/www) from the cordova webView url
 					        String baseURL = self.webView.getUrl();
