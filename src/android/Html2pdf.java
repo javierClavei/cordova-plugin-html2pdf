@@ -191,28 +191,24 @@ public class Html2pdf extends CordovaPlugin
 							        } catch(Exception e){
 								     throw new RuntimeException("Error generating file", e);
 							        } finally {
-								     //documento.close();
-								     //documento = null;
+								     // send success result to cordova
+							             PluginResult result = new PluginResult(PluginResult.Status.OK);
+							             result.setKeepCallback(false); 
+					                    	     self.callbackContext.sendPluginResult(result);
 							        }
-								
-						                // send success result to cordova
-						                PluginResult result = new PluginResult(PluginResult.Status.OK);
-						                result.setKeepCallback(false); 
-				                    		self.callbackContext.sendPluginResult(result);
 							}
 						});//end webview client
 								
 						// Reverse engineer base url (assets/www) from the cordova webView url
-					        //String baseURL = self.webView.getUrl();
-					        //baseURL        = baseURL.substring(0, baseURL.lastIndexOf('/') + 1);
+					        String baseURL = self.webView.getUrl();
+					        baseURL        = baseURL.substring(0, baseURL.lastIndexOf('/') + 1);
 						        
-					        // Load content into the print webview
 					        if( showWebViewForDebugging )
 		            	        	{
 					        	cordova.getActivity().addContentView(page, new ViewGroup.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
 		            	        	}
-				            	//page.loadDataWithBaseURL(baseURL, content, "text/html", "utf-8", null);
-				            	page.loadUrl("http://www.google.com");
+				            	page.loadDataWithBaseURL(baseURL, content, "text/html", "utf-8", null);
+				            	//page.loadUrl("http://www.google.com");
 			            	}
 			            }
 			        });
