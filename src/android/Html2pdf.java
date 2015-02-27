@@ -185,9 +185,9 @@ public class Html2pdf extends CordovaPlugin
 							             File root = Environment.getExternalStorageDirectory();          
 								     File file = new File(root,"webview.pdf");
 								     FileOutputStream out = new FileOutputStream(file);
-								     doc.writeTo(out);
+								     documento.writeTo(out);
 								     out.close();
-								     doc.close();
+								     documento.close();
 							        } catch(Exception e){
 								     throw new RuntimeException("Error generating file", e);
 							        } finally {
