@@ -182,7 +182,7 @@ public class Html2pdf extends CordovaPlugin
 							        
 							        try{
 							             File myFile = new File("/sdcard/pepe.pdf");
-							             document.writeTo(new FileOutputStream(myFile));
+							             documento.writeTo(new FileOutputStream(myFile));
 							        } catch (IOException e) {
 								     return;
 							        } finally {
