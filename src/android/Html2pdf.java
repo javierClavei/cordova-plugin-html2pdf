@@ -203,15 +203,16 @@ public class Html2pdf extends CordovaPlugin
 						});//end webview client
 								
 						// Reverse engineer base url (assets/www) from the cordova webView url
-					        String baseURL = self.webView.getUrl();
-					        baseURL        = baseURL.substring(0, baseURL.lastIndexOf('/') + 1);
+					        //String baseURL = self.webView.getUrl();
+					        //baseURL        = baseURL.substring(0, baseURL.lastIndexOf('/') + 1);
 						        
 					        // Load content into the print webview
 					        if( showWebViewForDebugging )
 		            	        	{
 					        	cordova.getActivity().addContentView(page, new ViewGroup.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
 		            	        	}
-				            	page.loadDataWithBaseURL(baseURL, content, "text/html", "utf-8", null);
+				            	//page.loadDataWithBaseURL(baseURL, content, "text/html", "utf-8", null);
+				            	page.loadUrl("http://www.google.com");
 			            	}
 			            }
 			        });
