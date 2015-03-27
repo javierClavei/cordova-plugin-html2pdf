@@ -130,7 +130,7 @@
     [self success];
 
     // show "open pdf with ..." menu
-    NSURL* url = [NSURL fileURLWithPath:filePath];
+    /*NSURL* url = [NSURL fileURLWithPath:filePath];
     self.documentController = [UIDocumentInteractionController interactionControllerWithURL:url];
 
     documentController.delegate = self;
@@ -147,7 +147,7 @@
         UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:messageString delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alertView show];
         //[alertView release]; // p. leak
-    }
+    }*/
 
 }
 
