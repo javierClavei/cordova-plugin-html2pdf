@@ -101,7 +101,7 @@
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView
 {
-    NSLog(@"Html2Pdf webViewDidFinishLoad");
+    /*NSLog(@"Html2Pdf webViewDidFinishLoad");
     
     UIPrintPageRenderer *render = [[UIPrintPageRenderer alloc] init];
     
@@ -123,13 +123,13 @@
     
 
     // remove webPage
-    /*[webView stopLoading];
+    [webView stopLoading];
     webView.delegate = nil;
     [webView removeFromSuperview];
-    webView = nil;*/
+    webView = nil;
 
     // trigger success response
-    [self success];
+    [self success];*/
 
     // show "open pdf with ..." menu
     /*NSURL* url = [NSURL fileURLWithPath:filePath];
