@@ -63,8 +63,8 @@
     // Load page into a webview and use its formatter to print the page
     UIWebView* webPage    = [[UIWebView alloc] init];
     webPage.delegate = self;
-    //webPage.frame = CGRectMake(0, 0, 1, 1); // Make web view small ...
-    //webPage.alpha = 0.0;                    // ... and invisible.
+    webPage.frame = CGRectMake(0, 0, 1, 1); // Make web view small ...
+    webPage.alpha = 0.0;                    // ... and invisible.
     [self.webView.superview addSubview:webPage];
     
     [webPage loadHTMLString:html baseURL:baseURL];
@@ -122,9 +122,9 @@
 
     // remove webPage
     [webView stopLoading];
-    /*webView.delegate = nil;
+    webView.delegate = nil;
     [webView removeFromSuperview];
-    webView = nil;*/
+    webView = nil;
 
     // trigger success response
     [self success];
