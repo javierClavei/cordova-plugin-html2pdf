@@ -104,13 +104,6 @@
     
     NSLog(@"Html2Pdf webViewDidFinishLoad");
     
-    [self performSelector:@selector(imprimirWebview:)
-               afterDelay:8.0f]; 
-
-}
-
-- (void)imprimirWebview:(NSData *)data {
-
     UIPrintPageRenderer *render = [[UIPrintPageRenderer alloc] init];
     
     [render addPrintFormatter:webView.viewPrintFormatter startingAtPageAtIndex:0];
@@ -159,6 +152,7 @@
         [alertView show];
         //[alertView release]; // p. leak
     }*/
+
 }
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
