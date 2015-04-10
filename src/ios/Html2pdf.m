@@ -101,35 +101,37 @@
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView
 {
-    /*NSLog(@"Html2Pdf webViewDidFinishLoad");
-    
-    UIPrintPageRenderer *render = [[UIPrintPageRenderer alloc] init];
-    
-    [render addPrintFormatter:webView.viewPrintFormatter startingAtPageAtIndex:0];
-    
-    CGRect printableRect = CGRectMake(self.pageMargins.left,
-                                      self.pageMargins.top,
-                                      self.pageSize.width - self.pageMargins.left - self.pageMargins.right,
-                                      self.pageSize.height - self.pageMargins.top - self.pageMargins.bottom);
-    
-    CGRect paperRect = CGRectMake(0, 0, self.pageSize.width, self.pageSize.height);
-    
-    [render setValue:[NSValue valueWithCGRect:paperRect] forKey:@"paperRect"];
-    [render setValue:[NSValue valueWithCGRect:printableRect] forKey:@"printableRect"];
-    
-    if (filePath) {
-        [[render printToPDF] writeToFile: filePath atomically: YES];
-    }
-    
-
-    // remove webPage
-    [webView stopLoading];
-    webView.delegate = nil;
-    [webView removeFromSuperview];
-    webView = nil;
-
-    // trigger success response
-    [self success];*/
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+         NSLog(@"Html2Pdf webViewDidFinishLoad");
+         
+         UIPrintPageRenderer *render = [[UIPrintPageRenderer alloc] init];
+         
+         [render addPrintFormatter:webView.viewPrintFormatter startingAtPageAtIndex:0];
+         
+         CGRect printableRect = CGRectMake(self.pageMargins.left,
+                                           self.pageMargins.top,
+                                           self.pageSize.width - self.pageMargins.left - self.pageMargins.right,
+                                           self.pageSize.height - self.pageMargins.top - self.pageMargins.bottom);
+         
+         CGRect paperRect = CGRectMake(0, 0, self.pageSize.width, self.pageSize.height);
+         
+         [render setValue:[NSValue valueWithCGRect:paperRect] forKey:@"paperRect"];
+         [render setValue:[NSValue valueWithCGRect:printableRect] forKey:@"printableRect"];
+         
+         if (filePath) {
+             [[render printToPDF] writeToFile: filePath atomically: YES];
+         }
+         
+     
+         // remove webPage
+         [webView stopLoading];
+         webView.delegate = nil;
+         [webView removeFromSuperview];
+         webView = nil;
+     
+         // trigger success response
+         [self success];
+    });
 
     // show "open pdf with ..." menu
     /*NSURL* url = [NSURL fileURLWithPath:filePath];
