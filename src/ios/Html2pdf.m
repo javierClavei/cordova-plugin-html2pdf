@@ -127,13 +127,13 @@
         }
         
     
-       /* // remove webPage
+        // remove webPage
         [webView stopLoading];
         webView.delegate = nil;
         [webView removeFromSuperview];
         webView = nil;
     
-        // trigger success response
+        /*// trigger success response
         [self success];*/
         
     
