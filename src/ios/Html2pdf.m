@@ -128,13 +128,13 @@
         
     
         // remove webPage
-        [webView stopLoading];
+        /*[webView stopLoading];
         webView.delegate = nil;
         [webView removeFromSuperview];
-        webView = nil;
+        webView = nil;*/
     
-        /*// trigger success response
-        [self success];*/
+        // trigger success response
+        [self success];
         
     
         // show "open pdf with ..." menu
