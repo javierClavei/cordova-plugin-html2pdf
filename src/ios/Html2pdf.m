@@ -105,8 +105,8 @@
     NSLog(@"Html2Pdf webViewDidFinishLoad");
     
     int64_t delay = 9.0; // In seconds
-    dispatch_time_t time = dispatch_time(DISPATCH_TIME_NOW, delay * NSEC_PER_SEC);
-    dispatch_after(time, dispatch_get_main_queue(), ^(void){
+    //dispatch_time_t time = dispatch_time(DISPATCH_TIME_NOW, delay * NSEC_PER_SEC);
+    //dispatch_after(time, dispatch_get_main_queue(), ^(void){
 
         UIPrintPageRenderer *render = [[UIPrintPageRenderer alloc] init];
     
@@ -156,7 +156,7 @@
             [alertView show];
             //[alertView release]; // p. leak
         }*/
-    });
+    //});
 
 }
 
