@@ -104,54 +104,59 @@
     
     NSLog(@"Html2Pdf webViewDidFinishLoad");
     
-    UIPrintPageRenderer *render = [[UIPrintPageRenderer alloc] init];
-    
-    [render addPrintFormatter:webView.viewPrintFormatter startingAtPageAtIndex:0];
-    
-    CGRect printableRect = CGRectMake(self.pageMargins.left,
-                                      self.pageMargins.top,
-                                      self.pageSize.width - self.pageMargins.left - self.pageMargins.right,
-                                      self.pageSize.height - self.pageMargins.top - self.pageMargins.bottom);
-    
-    CGRect paperRect = CGRectMake(0, 0, self.pageSize.width, self.pageSize.height);
-    
-    [render setValue:[NSValue valueWithCGRect:paperRect] forKey:@"paperRect"];
-    [render setValue:[NSValue valueWithCGRect:printableRect] forKey:@"printableRect"];
-    
-    if (filePath) {
-        [[render printToPDF] writeToFile: filePath atomically: YES];
-    }
-    
+    int64_t delay = 9.0; // In seconds
+    dispatch_time_t time = dispatch_time(DISPATCH_TIME_NOW, delay * NSEC_PER_SEC);
+    dispatch_after(time, dispatch_get_main_queue(), ^(void){
 
-    // remove webPage
-    [webView stopLoading];
-    webView.delegate = nil;
-    [webView removeFromSuperview];
-    webView = nil;
-
-    // trigger success response
-    [self success];
+        UIPrintPageRenderer *render = [[UIPrintPageRenderer alloc] init];
     
-
-    // show "open pdf with ..." menu
-    /*NSURL* url = [NSURL fileURLWithPath:filePath];
-    self.documentController = [UIDocumentInteractionController interactionControllerWithURL:url];
-
-    documentController.delegate = self;
-
-    UIView* view = self.webView.superview;
-    CGRect rect = view.frame; // open in top center
-    rect.size.height *= 0.02;
-
-    BOOL isValid = [documentController presentOpenInMenuFromRect:rect inView:view animated:YES];
-    
-    if (!isValid) {
-        NSString* messageString = [NSString stringWithFormat:@"No PDF reader was found on your device. Please download a PDF reader (eg. iBooks or Acrobat)."];
+        [render addPrintFormatter:webView.viewPrintFormatter startingAtPageAtIndex:0];
         
-        UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:messageString delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-        [alertView show];
-        //[alertView release]; // p. leak
-    }*/
+        CGRect printableRect = CGRectMake(self.pageMargins.left,
+                                          self.pageMargins.top,
+                                          self.pageSize.width - self.pageMargins.left - self.pageMargins.right,
+                                          self.pageSize.height - self.pageMargins.top - self.pageMargins.bottom);
+        
+        CGRect paperRect = CGRectMake(0, 0, self.pageSize.width, self.pageSize.height);
+        
+        [render setValue:[NSValue valueWithCGRect:paperRect] forKey:@"paperRect"];
+        [render setValue:[NSValue valueWithCGRect:printableRect] forKey:@"printableRect"];
+        
+        if (filePath) {
+            [[render printToPDF] writeToFile: filePath atomically: YES];
+        }
+        
+    
+        // remove webPage
+        [webView stopLoading];
+        webView.delegate = nil;
+        [webView removeFromSuperview];
+        webView = nil;
+    
+        // trigger success response
+        [self success];
+        
+    
+        // show "open pdf with ..." menu
+        /*NSURL* url = [NSURL fileURLWithPath:filePath];
+        self.documentController = [UIDocumentInteractionController interactionControllerWithURL:url];
+    
+        documentController.delegate = self;
+    
+        UIView* view = self.webView.superview;
+        CGRect rect = view.frame; // open in top center
+        rect.size.height *= 0.02;
+    
+        BOOL isValid = [documentController presentOpenInMenuFromRect:rect inView:view animated:YES];
+        
+        if (!isValid) {
+            NSString* messageString = [NSString stringWithFormat:@"No PDF reader was found on your device. Please download a PDF reader (eg. iBooks or Acrobat)."];
+            
+            UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:messageString delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+            [alertView show];
+            //[alertView release]; // p. leak
+        }*/
+    });
 
 }
 
