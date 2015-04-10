@@ -106,9 +106,9 @@
     
     int64_t delay = 9.0; // In seconds
     dispatch_time_t time = dispatch_time(DISPATCH_TIME_NOW, delay * NSEC_PER_SEC);
-    //dispatch_after(time, dispatch_get_main_queue(), ^(void){
+    dispatch_after(time, dispatch_get_main_queue(), ^(void){
 
-        UIPrintPageRenderer *render = [[UIPrintPageRenderer alloc] init];
+        /*UIPrintPageRenderer *render = [[UIPrintPageRenderer alloc] init];
     
         [render addPrintFormatter:webView.viewPrintFormatter startingAtPageAtIndex:0];
         
@@ -134,7 +134,7 @@
         webView = nil;
     
         // trigger success response
-        [self success];
+        [self success];*/
         
     
         // show "open pdf with ..." menu
@@ -156,7 +156,7 @@
             [alertView show];
             //[alertView release]; // p. leak
         }*/
-    //});
+    });
 
 }
 
