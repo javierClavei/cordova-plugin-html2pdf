@@ -128,8 +128,8 @@
         
     
         // remove webPage
-        //[webView stopLoading];
-        //webView.delegate = nil;
+        [webView stopLoading];
+        webView.delegate = nil;
         [webView removeFromSuperview];
         //webView = nil;
     
