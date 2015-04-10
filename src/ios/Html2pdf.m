@@ -122,9 +122,9 @@
 
     // remove webPage
     [webView stopLoading];
-    webView.delegate = nil;
+    /*webView.delegate = nil;
     [webView removeFromSuperview];
-    webView = nil;
+    webView = nil;*/
 
     // trigger success response
     [self success];
