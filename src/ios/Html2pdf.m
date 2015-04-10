@@ -108,7 +108,7 @@
     dispatch_time_t time = dispatch_time(DISPATCH_TIME_NOW, delay * NSEC_PER_SEC);
     dispatch_after(time, dispatch_get_main_queue(), ^(void){
 
-        /*UIPrintPageRenderer *render = [[UIPrintPageRenderer alloc] init];
+        UIPrintPageRenderer *render = [[UIPrintPageRenderer alloc] init];
     
         [render addPrintFormatter:webView.viewPrintFormatter startingAtPageAtIndex:0];
         
@@ -127,7 +127,7 @@
         }
         
     
-        // remove webPage
+       /* // remove webPage
         [webView stopLoading];
         webView.delegate = nil;
         [webView removeFromSuperview];
