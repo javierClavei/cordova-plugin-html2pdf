@@ -2,7 +2,7 @@
 <plugin xmlns="http://www.phonegap.com/ns/plugins/1.0"
     xmlns:android="http://schemas.android.com/apk/res/android"
     id="at.modalog.cordova.plugin.html2pdf"
-    version="1.0.115">
+    version="1.0.116">
 
     <name>Html2pdf</name>
     <repo>https://github.com/moderna/cordova-plugin-html2pdf.git</repo>
@@ -29,6 +29,10 @@
                 <param name="android-package" value="at.modalog.cordova.plugin.html2pdf.Html2pdf"/>
             </feature>
         </config-file>
+        
+        <config-file target="AndroidManifest.xml" parent="/manifest">
+		<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+	</config-file>
 
         <source-file src="src/android/Html2pdf.java" target-dir="src/at/modalog/cordova/plugin/html2pdf" />
 	<source-file src="src/android/libs/itextg-5.5.3.jar" target-dir="libs" />
