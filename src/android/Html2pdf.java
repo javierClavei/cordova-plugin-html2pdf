@@ -72,7 +72,7 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.util.Log;
 
-com.itextpdf.tool.xml.XMLWorkerHelper;
+import com.itextpdf.tool.xml.XMLWorkerHelper;
 
 public class Html2pdf extends CordovaPlugin
 {
