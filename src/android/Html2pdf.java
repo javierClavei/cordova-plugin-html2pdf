@@ -117,7 +117,7 @@ public class Html2pdf extends CordovaPlugin
 	// send success result to cordova
         PluginResult result = new PluginResult(PluginResult.Status.OK);
         result.setKeepCallback(false); 
-        this.callbackContext.sendPluginResult(result);
+        callbackContext.sendPluginResult(result);
     }
 	
 }
