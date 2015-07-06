@@ -74,6 +74,17 @@ import android.util.Log;
 
 public class Html2pdf extends CordovaPlugin
 {
+   /**
+    * Constructor.
+    */
+    public Html2pdf() {
+	
+    }
+    
+    
+    @Override
+    public boolean execute (String action, JSONArray args, CallbackContext callbackContext) throws JSONException
+    {
 	try{     
 		String html = "<html><head></head><body>" + args.getString(0) + "</body></html>";        
 	
@@ -93,5 +104,11 @@ public class Html2pdf extends CordovaPlugin
 		System.out.println(e.getMessage()); 
 		
 	}
+	
+	// send success result to cordova
+        PluginResult result = new PluginResult(PluginResult.Status.OK);
+        result.setKeepCallback(false); 
+        self.callbackContext.sendPluginResult(result);
+    }
 	
 }
