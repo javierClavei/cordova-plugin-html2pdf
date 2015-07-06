@@ -89,7 +89,6 @@ public class Html2pdf extends CordovaPlugin
     @Override
     public boolean execute (String action, JSONArray args, CallbackContext callbackContext) throws JSONException
     {
-	final Html2pdf self = this;
 	
 	try{     
 		
@@ -118,7 +117,7 @@ public class Html2pdf extends CordovaPlugin
 	// send success result to cordova
         PluginResult result = new PluginResult(PluginResult.Status.OK);
         result.setKeepCallback(false); 
-        self.callbackContext.sendPluginResult(result);
+        this.callbackContext.sendPluginResult(result);
     }
 	
 }
