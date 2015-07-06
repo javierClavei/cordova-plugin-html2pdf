@@ -89,13 +89,19 @@ public class Html2pdf extends CordovaPlugin
     @Override
     public boolean execute (String action, JSONArray args, CallbackContext callbackContext) throws JSONException
     {
+	final Html2pdf self = this;
+	
 	try{     
+		
 		String html = "<html><head></head><body>" + args.getString(0) + "</body></html>";        
 	
 		Document doc = new Document();
 	
 		InputStream in = new ByteArrayInputStream(html.getBytes());
-		PdfWriter pdf = PdfWriter.getInstance(doc, new FileOutputStream(p.getApplication().getExternalFilesDir("MyFileStorage") + "/out.pdf")); 
+		
+		File sdCard = Environment.getExternalStorageDirectory();
+		
+		PdfWriter pdf = PdfWriter.getInstance(doc, new FileOutputStream(sdCard.getAbsolutePath() + "/out.pdf")); 
 	
 		doc.open();
 	
