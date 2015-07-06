@@ -121,8 +121,6 @@ public class Html2pdf extends CordovaPlugin
 		
 		return false;
 	}
-	
-	return false;
     }
 	
 }
