@@ -58,7 +58,7 @@
     
     // define page size and margins
     self.pageSize = kPaperSizeA4;
-    self.pageMargins = UIEdgeInsetsMake(0, 0, 0, 0);
+    self.pageMargins = UIEdgeInsetsMake(10, 5, 10, 5);
     
     // Load page into a webview and use its formatter to print the page
     UIWebView* webPage    = [[UIWebView alloc] init];
