@@ -24,6 +24,7 @@
  */
 
 #import "Html2pdf.h"
+#import <Cordova/CDV.h>
 
 @interface Html2pdf (Private)
 
