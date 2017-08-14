@@ -39,7 +39,7 @@
 
 @implementation Html2pdf
 
-@synthesize command, filePath, pageSize, pageMargins, documentController;
+@synthesize filePath, pageSize, pageMargins, documentController;
 
 - (void)create:(CDVInvokedUrlCommand*)command
 {
