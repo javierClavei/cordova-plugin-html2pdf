@@ -48,7 +48,8 @@
     //NSArray* arguments = command.arguments;
 
     NSLog(@"Creating pdf from html has been started.");
-
+ 
+    self.callbackId = command.callbackId;
     NSString* html = [command argumentAtIndex:0];
     self.filePath  = [[command argumentAtIndex:1] stringByExpandingTildeInPath];
     
@@ -82,7 +83,8 @@
                                                 messageAsString:[resultMsg stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
     
     // send cordova result
-    [self writeJavascript:[result toSuccessCallbackString:command.callbackId]];
+    //[self writeJavascript:[result toSuccessCallbackString:command.callbackId]];
+    [self.commandDelegate sendPluginResult:result callbackId:self.callbackId];
 }
 
 - (void)error:(NSString*)message
@@ -95,7 +97,8 @@
                                                 messageAsString:[resultMsg stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
     
     // send cordova result
-    [self writeJavascript:[result toErrorCallbackString:command.callbackId]];
+    //[self writeJavascript:[result toErrorCallbackString:command.callbackId]];
+    [self.commandDelegate sendPluginResult:result callbackId:self.callbackId];
 
 }
 
