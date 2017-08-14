@@ -23,7 +23,7 @@
 -(void) create: (CDVInvokedUrlCommand*)command;
 
 // retain command for async repsonses
-@property (nonatomic, strong) CDVInvokedUrlCommand* command;
+//@property (nonatomic, strong) CDVInvokedUrlCommand* command;
 @property (nonatomic, strong) NSString* filePath;
 @property (nonatomic, assign) CGSize pageSize;
 @property (nonatomic, assign) UIEdgeInsets pageMargins;
