@@ -2,7 +2,7 @@
 <plugin xmlns="http://www.phonegap.com/ns/plugins/1.0"
     xmlns:android="http://schemas.android.com/apk/res/android"
     id="at.modalog.cordova.plugin.html2pdf"
-    version="1.0.126">
+    version="1.0.127">
 
     <name>Html2pdf</name>
     <repo>https://github.com/moderna/cordova-plugin-html2pdf.git</repo>
@@ -17,6 +17,10 @@
 		GitHub: https://github.com/ymasory/iText-4.2.0
 		Download .jar:: https://github.com/ymasory/iText-4.2.0/downloads
     </description>
+	
+	<engines>
+	    <engine name="cordova" version="&gt;=3.1.0" />
+    </engines>
 
     <js-module src="www/Html2pdf.js" name="Html2pdf">
         <clobbers target="html2pdf" /><!-- will be available under window.html2pdf -->
