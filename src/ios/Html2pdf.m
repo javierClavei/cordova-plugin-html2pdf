@@ -45,12 +45,12 @@
 {
     //self.command = command;
     
-    NSArray* arguments = command.arguments;
+    //NSArray* arguments = command.arguments;
 
     NSLog(@"Creating pdf from html has been started.");
     
-    NSString* html = [arguments objectAtIndex:0];
-    self.filePath  = [[arguments objectAtIndex:1] stringByExpandingTildeInPath];
+    NSString* html = [command argumentAtIndex:0];
+    self.filePath  = [[command argumentAtIndex:1] stringByExpandingTildeInPath];
     
     // Set the base URL to be the www directory.
     NSString* wwwFilePath = [[NSBundle mainBundle] pathForResource:@"www" ofType:nil];
