@@ -7,6 +7,7 @@
 #import <Foundation/Foundation.h>
 
 #import <Cordova/CDVPlugin.h>
+
 #import <Cordova/CDVJSON_private.h>
 
 #import "AppDelegate.h"
