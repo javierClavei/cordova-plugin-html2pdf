@@ -19,6 +19,8 @@
 {
 }
 
+@property (nonatomic, copy) NSString* callbackId;
+
 // read / write
 -(void) create: (CDVInvokedUrlCommand*)command;
 
