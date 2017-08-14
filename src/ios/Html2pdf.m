@@ -24,7 +24,6 @@
  */
 
 #import "Html2pdf.h"
-#import <Cordova/CDV.h>
 
 @interface Html2pdf (Private)
 
@@ -49,7 +48,7 @@
     //NSArray* arguments = command.arguments;
 
     NSLog(@"Creating pdf from html has been started.");
-    self.callbackId = command.callbackId;
+
     NSString* html = [command argumentAtIndex:0];
     self.filePath  = [[command argumentAtIndex:1] stringByExpandingTildeInPath];
     
