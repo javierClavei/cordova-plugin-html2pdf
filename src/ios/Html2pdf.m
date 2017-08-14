@@ -43,7 +43,7 @@
 
 - (void)create:(CDVInvokedUrlCommand*)command
 {
-    self.command = command;
+    //self.command = command;
     
     NSArray* arguments = command.arguments;
 
